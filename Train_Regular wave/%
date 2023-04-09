@@ -1,0 +1,38 @@
+%prepare for data
+id_input=wavefixedpoint(:,2:4);
+id_output=wavefixedpoint(:,1);
+%
+                                                                            
+% Details about Estimation Data                                             
+ % Import   mydata                                                          
+                                                                            
+% Estimation of Nonlinear ARX model                                         
+% Create Regressors                                                         
+Vars = {'y1', 'u1', 'u2', 'u3'};                                            
+Lags = {[1 2], [1 2], [1 2], [1 2]};                                        
+R1 = linearRegressor(Vars, Lags);                                           
+                                                                            
+Vars = {'y1', 'u1', 'u2', 'u3'};                                            
+Lags = {[1 2], [1 2], [1 2], [1 2]};                                        
+R2 = periodicRegressor(Vars, Lags, 0.5, 4);                                 
+R2.UseAbsolute = [true true true true];                                     
+                                                                            
+Regressors = [R1; R2];                                                      
+% Create Output Function                                                    
+NL = idWaveletNetwork;                                                      
+                                                  
+% Create a template IDNLARX model                                           
+initialModel = idnlarx(mydata.OutputName, mydata.InputName, Regressors, NL);
+                                                                            
+Options = nlarxOptions;                                            
+% Estimate a Nonlinear ARX Model                                            
+nlarx1 = nlarx(mydata, initialModel, Options); 
+
+%compare
+compare(mydata,nlarx1,'--');
+pos=axis;
+ylabel("Response/m");
+xlabel("",'position',[-200,0]);
+
+% plot(mydata);
+                                                                            
