@@ -33,4 +33,4 @@ compare(mydata,nlarx_modelC,'--');
 pos=axis;
 ylabel("Response/m");
 xlabel("",'position',[-200,0]);
-
+set(figure(1),'Position',[100,500,500,100]);

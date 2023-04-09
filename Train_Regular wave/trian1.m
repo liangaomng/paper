@@ -33,11 +33,12 @@ Id_output_test=Test_Data(:,1);
 % % Estimate a Nonlinear ARX Model                                            
 % nlarx1 = nlarx(mydata, initialModel, Options); 
 nlarx_modelA=nlarx1;
-compare(mydata,nlarx_modelA,'--');
+compare(Valid_data,nlarx_modelA,'--');
 pos=axis;
 ylabel("Response/m");
 xlabel("",'position',[-200,0]);
 %plot(mydata);
+
 
 
 
