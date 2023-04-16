@@ -47,7 +47,7 @@ Id_output_test=Test_Data(:,1);
 nlhw_modelB=nlhw2;
 compare(Valid_data,nlhw_modelB,'--');
 ylabel("Response/m");
-xlabel("",'position',[-200,0]);
+xlabel("Sample",'position',[-200,-1000]);
 
 
 
